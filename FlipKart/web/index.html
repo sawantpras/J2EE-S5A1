@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Form Validation with JavaScript</title>
+        <!-- importing css into our html -->
+        <link rel="stylesheet" type="text/css" href="newcss1.css">
+    </head>
+    <body>
+        <h2 style="color: #ff4359"> Registration Form </h2>
+        <div id="wrapper">
+            <form method="get" action="MyServlet" onsubmit="return Validate();" name="vform">
+                <div>
+                    <!-- creating fields on form -->
+                    <input type="text" name="username" class="textInput" placeholder="Username">
+                    <div id="name_error" class="val_error"></div>
+                </div>  
+                <div>
+                    <input type="text" name="firstname" class="textInput" placeholder="FirstName">
+                    <div id="firstname_error" class="val_error"></div>
+                </div>  
+                <div>
+                    <input type="text" name="lastname" class="textInput" placeholder="LastName">
+                    <div id="lastname_error" class="val_error"></div>
+                </div>  
+                <div>
+                    <input type="email" name="email" class="textInput" placeholder="Email Id">
+                    <div id="email_error" class="val_error"></div>
+                </div> 
+                <div>
+                    <input type="number" name="mobile" class="textInput" placeholder="Mobile No">
+                    <div id="mobile_error" class="val_error"></div>
+                </div> 
+                <div>
+                    <input type="text" name="country" class="textInput" placeholder="Country">
+                    <div id="country_error" class="val_error"></div>
+                </div> 
+                <div>
+                    <input type="text" name="city" class="textInput" placeholder="City">
+                    <div id="city_error" class="val_error"></div>
+                </div> 
+                <div>
+                    <input type="number" name="pincode" class="textInput" placeholder="Pincode">
+                    <div id="pincode_error" class="val_error"></div>
+                </div>
+                <div>
+                    <input type="submit" value="Submit" name="register" class="btn">
+                </div> 
+            </form>
+        </div>
+
+        <!-- Adding JavaScript -->
+        <script type="text/javascript">
+            // Getting all input text objects
+            var username = document.forms["vform"]["username"];
+            var firstname = document.forms["vform"]["firstname"];
+            var lastname = document.forms["vform"]["lastname"];
+            var email = document.forms["vform"]["email"];
+            var mobile = document.forms["vform"]["mobile"];
+            var country = document.forms["vform"]["country"];
+            var city = document.forms["vform"]["city"];
+            var pincode = document.forms["vform"]["pincode"];
+            var submit = document.forms["vform"]["submit"];
+
+            //Getting all Error display objects
+            var name_error = document.getElementById("name_error");
+            var firstname_error = document.getElementById("firstname_error");
+            var lastname_error = document.getElementById("lastname_error");
+            var email_error = document.getElementById("email_error");
+            var mobile_error = document.getElementById("mobile_error");
+            var country_error = document.getElementById("country_error");
+            var city_error = document.getElementById("city_error");
+            var pincode_error = document.getElementById("pincode_error");
+
+            //Setting all Event Listeners
+            username.addEventListener("blur", nameVerify, true);
+            firstname.addEventListener("blur", firstnameVerify, true);
+            lastname.addEventListener("blur", lastnameVerify, true);
+            email.addEventListener("blur", emailVerify, true);
+            mobile.addEventListener("blur", mobileVerify, true);
+            country.addEventListener("blur", countryVerify, true);
+            city.addEventListener("blur", cityVerify, true);
+            pincode.addEventListener("blur", pincodeVerify, true);
+            submit.addEventListener("blur", getConfirmation, true)
+
+            //Validation Function
+            function  Validate() {
+                if (!confirm("Are you sure you want to submit it")) {
+                    return false;
+                }
+
+                if (username.value === "") {
+                    username.style.border = "1px solid red";
+                    name_error.textContent = "Username is required";
+                    username.focus();
+                    return false;
+                }
+                if (firstname.value === "") {
+                    firstname.style.border = "1px solid red";
+                    firstname_error.textContent = "FirstName is required";
+                    firstname.focus();
+                    return false;
+                }
+                if (lastname.value === "") {
+                    lastname.style.border = "1px solid red";
+                    lastname_error.textContent = "LastName is required";
+                    lastname.focus();
+                    return false;
+                }
+
+                if (email.value === "") {
+                    email.style.border = "1px solid red";
+                    email_error.textContent = "Email is required";
+                    email.focus();
+                    return false;
+                }
+                if (mobile.value.length > 10 || mobile.value.length < 10) {
+                    mobile.style.border = "1px solid red";
+                    mobile_error.textContent = "Mobile Number should be 10 digits only";
+                    mobile.focus();
+                    return false;
+                }
+                if (country.value === "") {
+                    country.style.border = "1px solid red";
+                    country_error.textContent = "Country Name is required";
+                    country.focus();
+                    return false;
+                }
+
+                if (city.value === "") {
+                    city.style.border = "1px solid red";
+                    city_error.textContent = "City Name is required";
+                    city.focus();
+                    return false;
+                }
+                if (pincode.value.length > 6 || pincode.value.length < 6) {
+                    pincode.style.border = "1px solid red";
+                    pincode_error.textContent = "Pincode should be 6 digits only";
+                    pincode.focus();
+                    return false;
+                }
+            }
+
+            //Event Handler Functions
+            function nameVerify() {
+                if (username.value !== "") {
+                    username.style.border = "1px solid #ff6666";
+                    name_error.innerHTML = "";
+                    return true;
+                }
+            }
+            function firstnameVerify() {
+                if (firstname.value !== "") {
+                    firstname.style.border = "1px solid #ff6666";
+                    firstname_error.innerHTML = "";
+                    return true;
+                }
+            }
+            function lastnameVerify() {
+                if (lastname.value !== "") {
+                    lastname.style.border = "1px solid #ff6666";
+                    lastname_error.innerHTML = "";
+                    return true;
+                }
+            }
+            function emailVerify() {
+                if (emailname.value !== "") {
+                    email.style.border = "1px solid #ff6666";
+                    email_error.innerHTML = "";
+                    return true;
+                }
+            }
+            function mobileVerify() {
+                if (mobile.value.length === 10) {
+                    mobile.style.border = "1px solid #ff6666";
+                    mobile_error.innerHTML = "";
+                    return true;
+                }
+            }
+            function countryVerify() {
+                if (country.value !== "") {
+                    country.style.border = "1px solid #ff6666";
+                    country_error.innerHTML = "";
+                    return true;
+                }
+            }
+            function cityVerify() {
+                if (city.value !== "") {
+                    city.style.border = "1px solid #ff6666";
+                    city_error.innerHTML = "";
+                    return true;
+                }
+            }
+            function pincodeVerify() {
+                if (pincode.value.length === 6) {
+                    pincode.style.border = "1px solid #ff6666";
+                    pincode_error.innerHTML = "";
+                    return true;
+                }
+            }
+
+            function passwordVerify() {
+                if (password.value !== "") {
+                    password.style.border = "1px solid #ff6666";
+                    password_error.innerHTML = "";
+                    return true;
+                }
+            }
+
+
+        </script>    
+    </body>
+</html>
